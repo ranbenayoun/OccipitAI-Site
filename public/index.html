@@ -73,22 +73,22 @@
 
         /* Event-based animations */
         @keyframes expandHorizontal {
-            0%, 100% { width: 0; opacity: 0.9; }
+            0%, 100% { width: 0; opacity: 0.3; }
             50% { width: 200px; opacity: 1; }
         }
 
         @keyframes expandVertical {
-            0%, 100% { height: 0; opacity: 0.9; }
+            0%, 100% { height: 0; opacity: 0.3; }
             50% { height: 200px; opacity: 1; }
         }
 
         @keyframes expandCircle {
-            0%, 100% { transform: scale(0); opacity: 0.9; }
+            0%, 100% { transform: scale(0); opacity: 0.3; }
             50% { transform: scale(1); opacity: 1; }
         }
 
         @keyframes rotateExpand {
-            0%, 100% { transform: rotate(0deg) scale(0); opacity: 0.9; }
+            0%, 100% { transform: rotate(0deg) scale(0); opacity: 0.3; }
             50% { transform: rotate(180deg) scale(1); opacity: 1; }
         }
 
@@ -222,13 +222,18 @@
             width: 100%;
             height: 100%;
             z-index: -2;
+            display: flex;
         }
 
         .hero-video {
-            width: 100%;
+            width: 50%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.3;
+            opacity: 0.4;
+        }
+
+        .hero-video.left {
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero-video-overlay {
@@ -237,7 +242,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
             z-index: -1;
         }
 
@@ -455,15 +460,7 @@
     <header>
         <nav>
             <a href="#" class="logo">
-                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Brain outline -->
-                    <path d="M20,35 C15,30 15,20 25,15 C35,10 45,15 50,20 C55,15 65,10 75,15 C85,20 85,30 80,35 C85,40 85,50 80,55 C85,60 80,70 70,75 C60,80 50,75 50,70 C50,75 40,80 30,75 C20,70 15,60 20,55 C15,50 15,40 20,35 Z" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <!-- Camera icon inside brain -->
-                    <rect x="35" y="30" width="20" height="15" rx="2" fill="currentColor"/>
-                    <circle cx="45" cy="37.5" r="4" fill="white"/>
-                    <circle cx="45" cy="37.5" r="2" fill="currentColor"/>
-                    <rect x="50" y="32" width="3" height="2" fill="currentColor"/>
-                </svg>
+                <img src="logo.png" alt="OccipitAI Logo" class="logo-icon"/>
                 OccipitAI
             </a>
             <div class="nav-links">
@@ -475,16 +472,28 @@
         </nav>
     </header>
 
+
+    <style>
+    .logo-icon {
+        height: 40px;
+        width: auto;
+        vertical-align: middle;
+        margin-right: 2px;
+    }
+    </style>
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
         <section class="hero">
             <!-- Video Background Infrastructure -->
             <div class="hero-video-container">
-                <!-- Video will be inserted here -->
-                <video class="hero-video" autoplay muted loop playsinline>
-                    <!-- Add your drone/event camera video source here -->
-                    <!-- <source src="path/to/your/drone-video.mp4" type="video/mp4"> -->
+                <!-- Left video: Original footage -->
+                <video class="hero-video left" autoplay muted loop playsinline>
+                    <source src="medi_city.mp4" type="video/mp4">
+                </video>
+                <!-- Right video: Reconstructed footage -->
+                <video class="hero-video right" autoplay muted loop playsinline>
+                    <source src="medi_city_recon.mp4" type="video/mp4">
                 </video>
                 <div class="hero-video-overlay"></div>
             </div>
@@ -577,11 +586,16 @@
                     </div>
                     <div class="contact-item">
                         <h4>Dan Shahak, CTO</h4>
-                        <p>Expert in Generative AI and Computer Vision</p>
+                        <p>GenAI and Computer Vision Expert</p>
                         <p><a href="mailto:dan.shahak@occipitai.com">dan.shahak@occipitai.com</a></p>
                     </div>
                 </div>
             </div>
+            <footer style="text-align:center; padding:3rem 0; background:#000;">
+    <img src="logo.png" alt="OccipitAI Logo" class="logo-icon" />
+    <p> 2025 OccipitAI&copy;</p>
+</footer>
+
         </section>
     </main>
 
@@ -627,6 +641,8 @@
         document.querySelectorAll('.section').forEach(section => {
             observer.observe(section);
         });
+
+    
     </script>
 </body>
 </html>
